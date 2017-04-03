@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\TOrder */
 
-$this->title = 'Create Torder';
+$this->title = 'Buat Order';
 $this->params['breadcrumbs'][] = ['label' => 'Torders', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
