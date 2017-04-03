@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\TOrder;
 use app\models\TOrderSearch;
+use app\models\TOrderDetail;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -65,8 +66,18 @@ class TOrderController extends Controller
     {
         $model = new TOrder();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->orderId]);
+        if ($model->load(Yii::$app->request->post())) {
+            $request = Yii::$app->request->post('TOrder');
+
+            $postTgl = $request['orderTgl'];
+            $saveTgl = date('Y-m-d',strtotime($postTgl));
+            $seconds = date('h:i:s');
+            $userid = Yii::$app->user->id;
+            
+            $model->orderTgl = $saveTgl.' '.$seconds;
+            $model->userId = $userid;
+            $model->save();
+            return $this->redirect(['detail','id' => $model->orderId]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -119,6 +130,34 @@ class TOrderController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    public function actionDetail($id)
+    {
+        $searchModel = new TOrderSearch();
+        $dataProvider = $searchModel->searchDetail($id);
+
+        return $this->render('detail', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionCreateDetail()
+    {
+        $model = new TOrderDetail();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $request = Yii::$app->request->post('TOrderDetail');
+
+            
+            $model->save();
+            return $this->redirect(['detail','id' => $model->orderId]);
+        } else {
+            return $this->render('create-detail', [
+                'model' => $model,
+            ]);
         }
     }
 }
