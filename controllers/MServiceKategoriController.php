@@ -1,14 +1,13 @@
 <?php
-
 namespace app\controllers;
-
 use Yii;
 use app\models\MServiceKategori;
 use app\models\MServiceKategoriSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-
+use yii\helpers\ArrayHelper;
+use app\models\MService;
 /**
  * MServiceKategoriController implements the CRUD actions for MServiceKategori model.
  */
@@ -28,7 +27,6 @@ class MServiceKategoriController extends Controller
             ],
         ];
     }
-
     /**
      * Lists all MServiceKategori models.
      * @return mixed
@@ -37,13 +35,12 @@ class MServiceKategoriController extends Controller
     {
         $searchModel = new MServiceKategoriSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
+        $dataProvider->pagination->pageSize=10;
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
-
     /**
      * Displays a single MServiceKategori model.
      * @param integer $id
@@ -55,7 +52,18 @@ class MServiceKategoriController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+   
+    public function ary_service(){
+        return ArrayHelper::map(MService::find()->all(),'serviceId','serviceJudul');
+    }
 
+    
+    public function ary_status(){
+        $ary_status =[['id'=>'1', 'status'=> 'Active'],
+            ['id'=>'0', 'status'=> 'InActive']
+        ];
+        return ArrayHelper::map($ary_status,'id','status');
+    }
     /**
      * Creates a new MServiceKategori model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -64,16 +72,15 @@ class MServiceKategoriController extends Controller
     public function actionCreate()
     {
         $model = new MServiceKategori();
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->serviceKategoriId]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'data_service' => self::ary_service()
             ]);
         }
     }
-
     /**
      * Updates an existing MServiceKategori model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -83,16 +90,16 @@ class MServiceKategoriController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->serviceKategoriId]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'data_service' => self::ary_service(),
+                'data_status'=>self::ary_status()
             ]);
         }
     }
-
     /**
      * Deletes an existing MServiceKategori model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -102,10 +109,8 @@ class MServiceKategoriController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
         return $this->redirect(['index']);
     }
-
     /**
      * Finds the MServiceKategori model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

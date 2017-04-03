@@ -1,14 +1,20 @@
-<?php
 
+<?php
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
 /* @var $this yii\web\View */
 /* @var $model app\models\MServiceDetail */
-
 $this->title = $model->serviceDetailId;
 $this->params['breadcrumbs'][] = ['label' => 'Mservice Details', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+function status($status){
+    if($status){
+         $active_inactive = '<span class="glyphicon glyphicon-ok"></span';
+    }else{
+        $active_inactive =  '<span class="glyphicon glyphicon-remove"></span';
+    }
+    return $active_inactive;
+};
 ?>
 <div class="mservice-detail-view">
 
@@ -32,9 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'serviceDetailJudul',
             'serviceDetailDeskripsi:ntext',
             'serviceDetailGambar',
-            'serviceKategoriId',
-            'serviceId',
-            'serviceDetailStatus',
+            'serviceJudul',
+            'servicejudulheader',
+            [
+                'label'=>'Status',
+                'format'=>'raw',
+                'value'=>status($model->serviceDetailStatus)
+            ]
+            // 'serviceDetailStatus',
         ],
     ]) ?>
 
