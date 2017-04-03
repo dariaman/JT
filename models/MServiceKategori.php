@@ -1,9 +1,7 @@
 <?php
-
 namespace app\models;
-
 use Yii;
-
+use app\models\MService;
 /**
  * This is the model class for table "m_service_kategori".
  *
@@ -22,7 +20,6 @@ class MServiceKategori extends \yii\db\ActiveRecord
     {
         return 'm_service_kategori';
     }
-
     /**
      * @inheritdoc
      */
@@ -36,7 +33,12 @@ class MServiceKategori extends \yii\db\ActiveRecord
             [['serviceKategoriStatus'], 'string', 'max' => 1],
         ];
     }
-
+      public function getServiceTbl(){
+        return $this->hasOne(MService::className(), ['serviceId' => 'serviceId']);
+    }
+     public function getServiceNama(){
+         return $this->serviceTbl != '' ? $this->serviceTbl->serviceJudul : 'none';
+    }
     /**
      * @inheritdoc
      */
@@ -50,7 +52,6 @@ class MServiceKategori extends \yii\db\ActiveRecord
             'serviceId' => 'Service ID',
         ];
     }
-
     /**
      * @inheritdoc
      * @return MServiceKategoriQuery the active query used by this AR class.
