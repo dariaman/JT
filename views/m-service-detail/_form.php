@@ -1,7 +1,10 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
+use kartik\select2\Select2;
+use kartik\depdrop\DepDrop;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MServiceDetail */
@@ -10,7 +13,10 @@ use yii\widgets\ActiveForm;
 
 <div class="mservice-detail-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id'=>$model->formName(),
+        'layout' => 'horizontal',
+    ]); ?>
 
     <?= $form->field($model, 'serviceDetailJudul')->textInput(['maxlength' => true]) ?>
 
@@ -18,11 +24,31 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'serviceDetailGambar')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'serviceKategoriId')->textInput() ?>
+    <?= $form->field($model, 'serviceId')->widget(Select2::classname(), [
+        'data' => $data_service,
+        'options' => ['placeholder' => 'Select a ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ])->label('Service') ?>
 
-    <?= $form->field($model, 'serviceId')->textInput() ?>
+      <?php
+    if(!$model->isNewRecord){
+    ?>
 
-    <?= $form->field($model, 'serviceDetailStatus')->textInput(['maxlength' => true]) ?>
+        <?= $form->field($model, 'serviceDetailStatus')->widget(Select2::classname(), [
+        'data' => $data_status,
+        'options' => ['placeholder' => 'Select a ...'],
+        'pluginOptions' => [
+            'allowClear' => true
+        ],
+    ]) ?>
+
+    <?php
+        }
+    ?>
+
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

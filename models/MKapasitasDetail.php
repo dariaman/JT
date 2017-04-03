@@ -1,9 +1,6 @@
 <?php
-
 namespace app\models;
-
 use Yii;
-
 /**
  * This is the model class for table "m_kapasitas_detail".
  *
@@ -23,21 +20,19 @@ class MKapasitasDetail extends \yii\db\ActiveRecord
     {
         return 'm_kapasitas_detail';
     }
-
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['kapasitasJudul', 'kapasitasHarga', 'kapasitasStatus', 'serviceDetailId'], 'required'],
+            [['kapasitasJudul', 'kapasitasHarga', 'serviceDetailId'], 'required'],
             [['kapasitasHarga', 'serviceDetailId'], 'integer'],
             [['kapasitasDeskripsi'], 'string'],
             [['kapasitasJudul'], 'string', 'max' => 100],
             [['kapasitasStatus'], 'string', 'max' => 1],
         ];
     }
-
     /**
      * @inheritdoc
      */
@@ -52,7 +47,12 @@ class MKapasitasDetail extends \yii\db\ActiveRecord
             'kapasitasDeskripsi' => 'Kapasitas Deskripsi',
         ];
     }
-
+    public function getServiceDetailTbl(){
+            return $this->hasOne(MServiceDetail::className(), ['serviceDetailId' => 'serviceDetailId']);
+        }
+    public function getServicejuduldetail(){
+              return $this->serviceDetailTbl != '' ? $this->serviceDetailTbl->serviceDetailJudul : 'none';
+    }
     /**
      * @inheritdoc
      * @return MKapasitasDetailQuery the active query used by this AR class.
