@@ -47,65 +47,45 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                         \yiister\gentelella\widgets\Menu::widget(
                             [
                                 "items" => [
-                                    ["label" => "Home", "url" => "/", "icon" => "home"],
-                                    ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
-                                    ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
+                                    // ["label" => "Home", "url" => "/", "icon" => "home"],
+                                    ['label' => 'Gallery', 'url' => ['/m-gallery'], "icon" => "files-o"],
+                                    ['label' => 'InternetBanking', 'url' => ['/m-internet-banking'], "icon" => "files-o"],
+                                    ['label' => 'KartuDebit', 'url' => ['/m-kartu-debit'], "icon" => "files-o"],
+                                    ['label' => 'Rekan JagoTukang', 'url' => ['/m-rekan-jt'], "icon" => "files-o"],
+                                    ['label' => 'Order', 'url' => ['/t-order'], "icon" => "files-o"],
+
+                                    //["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
+                                    // ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
                                     [
-                                        "label" => "Widgets",
+                                        "label" => "Service",
                                         "icon" => "th",
                                         "url" => "#",
                                         "items" => [
-                                            ["label" => "Menu", "url" => ["site/menu"]],
-                                            ["label" => "Panel", "url" => ["site/panel"]],
+                                            ['label' => 'Service', 'url' => ['/m-service']],
+                                            ['label' => 'Service Kategori', 'url' => ['/m-service-kategori']],
+                                            ['label' => 'Service Detail', 'url' => ['/m-service-detail']],
+                                            ['label' => 'Kapasitas Detail', 'url' => ['/m-kapasitas-detail']],
                                         ],
                                     ],
                                     [
-                                        "label" => "Badges",
+                                        "label" => "Daerah",
                                         "url" => "#",
                                         "icon" => "table",
                                         "items" => [
-                                            [
-                                                "label" => "Default",
-                                                "url" => "#",
-                                                "badge" => "123",
-                                            ],
-                                            [
-                                                "label" => "Success",
-                                                "url" => "#",
-                                                "badge" => "new",
-                                                "badgeOptions" => ["class" => "label-success"],
-                                            ],
-                                            [
-                                                "label" => "Danger",
-                                                "url" => "#",
-                                                "badge" => "!",
-                                                "badgeOptions" => ["class" => "label-danger"],
-                                            ],
+                                            ['label' => 'Kelurahan', 'url' => ['/m-kelurahan']],
+                                            ['label' => 'Kecamatan', 'url' => ['/m-kecamatan']],                    
+                                            ['label' => 'Kota', 'url' => ['/m-kota']],
                                         ],
                                     ],
                                     [
-                                        "label" => "Multilevel",
+                                        "label" => "Info",
                                         "url" => "#",
                                         "icon" => "table",
                                         "items" => [
-                                            [
-                                                "label" => "Second level 1",
-                                                "url" => "#",
-                                            ],
-                                            [
-                                                "label" => "Second level 2",
-                                                "url" => "#",
-                                                "items" => [
-                                                    [
-                                                        "label" => "Third level 1",
-                                                        "url" => "#",
-                                                    ],
-                                                    [
-                                                        "label" => "Third level 2",
-                                                        "url" => "#",
-                                                    ],
-                                                ],
-                                            ],
+                                            ['label' => 'Promo', 'url' => ['/m-promo']],
+                                            ['label' => 'tips', 'url' => ['/m-tips']],
+                                            ['label' => 'testimoni', 'url' => ['/m-testimoni']],
+                                            ['label' => 'Faq', 'url' => ['/m-faq']]
                                         ],
                                     ],
                                 ],

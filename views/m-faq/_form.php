@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MFaq */
@@ -10,13 +10,13 @@ use yii\widgets\ActiveForm;
 
 <div class="mfaq-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
 
     <?= $form->field($model, 'faqJudul')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'faqDeskripsi')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'faqStatus')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'faqStatus')->checkbox(); ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

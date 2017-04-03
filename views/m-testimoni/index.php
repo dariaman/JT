@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MTestimoniSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mtestimonis';
+$this->title = 'Testimoni';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mtestimoni-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Mtestimoni', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create testimoni', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

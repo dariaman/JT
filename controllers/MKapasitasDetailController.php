@@ -72,7 +72,7 @@ class MKapasitasDetailController extends Controller
     public function actionCreate()
     {
         $model = new MKapasitasDetail();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->kapasitasId]);
         } else {
             return $this->render('create', [
@@ -90,7 +90,7 @@ class MKapasitasDetailController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
             return $this->redirect(['view', 'id' => $model->kapasitasId]);
         } else {
             return $this->render('update', [
@@ -100,24 +100,7 @@ class MKapasitasDetailController extends Controller
             ]);
         }
     }
-    /**
-     * Deletes an existing MKapasitasDetail model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionDelete($id)
-    {
-        $this->findModel($id)->delete();
-        return $this->redirect(['index']);
-    }
-    /**
-     * Finds the MKapasitasDetail model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return MKapasitasDetail the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    
     protected function findModel($id)
     {
         if (($model = MKapasitasDetail::findOne($id)) !== null) {

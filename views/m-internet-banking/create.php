@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MInternetBanking */
 
-$this->title = 'Create Minternet Banking';
+$this->title = 'Create Internet Banking';
 $this->params['breadcrumbs'][] = ['label' => 'Minternet Bankings', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

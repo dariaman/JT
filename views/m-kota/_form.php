@@ -1,16 +1,16 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MKota */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mkota-form">
+<div class="kota-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
 
     <?= $form->field($model, 'kotaNama')->textInput(['maxlength' => true]) ?>
 
