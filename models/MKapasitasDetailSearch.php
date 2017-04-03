@@ -47,6 +47,7 @@ class MKapasitasDetailSearch extends MKapasitasDetail
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=>false
         ]);
 
         $this->load($params);

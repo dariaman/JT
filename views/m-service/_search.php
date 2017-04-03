@@ -15,11 +15,9 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'serviceId') ?>
 
     <?= $form->field($model, 'serviceJudul') ?>
 
-    <?= $form->field($model, 'serviceStatus') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
