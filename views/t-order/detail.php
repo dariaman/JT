@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\TOrderSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Order';
+$this->title = 'Order Detail';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="torder-index">
@@ -21,33 +21,30 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            'orderDetailId',
             'orderId',
-            'orderTgl',
-            'orderJenisBayar',
-            'orderAlamat',
-            'orderKota',
-            'orderKelurahan',
-            'orderKecamatan',
-            'orderDaerah',
-            'orderKodePos',
-            'orderAlamatNote',
-            'orderGpsKoordinat',
-            'orderBiayaTransport',
-            'orderStatus',
+            'serviceDetailId',
+            'kapasitasId',
+            'rekanId',
+            'orderDetailTglKerja',
+            'orderDetailWaktuKerja',
+            'orderDetailKeluhan',
+            'orderDetailNote',
+            'orderDetailStatus',
+            'orderDetailQTY',
+            'orderDetailProperti',
             [
-                'header' => 'Detail',
+                'header' => 'Download Work Order',
                 'format' => 'raw',
-                'value' => function($data)
-                {
-                    return Html::a('Detail', ['detail', 'id' => $data['orderId']]);
+                'value' => function($data){
+                    return Html::a('Print WO',['print-wo','id' => $data['orderDetailId'],'orderid' => $data['orderId']]);
                 }
-                
             ]
 //            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
 
     <p>
-        <?= Html::a('Buat Order', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Buat Order', ['create-detail','id' => Yii::$app->request->get('id')], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

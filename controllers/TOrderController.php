@@ -5,9 +5,11 @@ namespace app\controllers;
 use Yii;
 use app\models\TOrder;
 use app\models\TOrderSearch;
+use app\models\TOrderDetail;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use kartik\mpdf\Pdf;
 
 /**
  * TOrderController implements the CRUD actions for TOrder model.
@@ -65,8 +67,18 @@ class TOrderController extends Controller
     {
         $model = new TOrder();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->orderId]);
+        if ($model->load(Yii::$app->request->post())) {
+            $request = Yii::$app->request->post('TOrder');
+
+            $postTgl = $request['orderTgl'];
+            $saveTgl = date('Y-m-d',strtotime($postTgl));
+            $seconds = date('h:i:s');
+            $userid = Yii::$app->user->id;
+            
+            $model->orderTgl = $saveTgl.' '.$seconds;
+            $model->userId = $userid;
+            $model->save();
+            return $this->redirect(['create-detail','id' => $model->orderId]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -120,5 +132,71 @@ class TOrderController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+    
+    public function actionDetail($id)
+    {
+        $searchModel = new TOrderSearch();
+        $dataProvider = $searchModel->searchDetail($id);
+
+        return $this->render('detail', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionCreateDetail()
+    {
+        $model = new TOrderDetail();
+
+        if ($model->load(Yii::$app->request->post())) {
+            $request = Yii::$app->request->post('TOrderDetail');
+            $orderDetailTgl = $request['orderDetailTglKerja'];
+            $toDate = date('Y-m-d',strtotime($orderDetailTgl));
+            $model->orderId = Yii::$app->request->post('orderId');
+            $model->orderDetailTglKerja = $toDate;
+            
+            $model->save();
+            return $this->redirect(['detail','id' => $model->orderId]);
+        } else {
+            return $this->render('create-detail', [
+                'model' => $model,
+            ]);
+        }
+    }
+    
+    public function actionPrintWo($id,$orderid) {
+        // get your HTML raw content without any layouts or scripts
+        
+        $content = $this->renderPartial('renderwo');
+
+        // setup kartik\mpdf\Pdf component
+        $pdf = new Pdf([
+            // set to use core fonts only
+            'mode' => Pdf::MODE_UTF8, 
+            // A4 paper format
+            'format' => Pdf::FORMAT_A4, 
+            // portrait orientation
+            'orientation' => Pdf::ORIENT_PORTRAIT, 
+            // stream to browser inline
+            'destination' => Pdf::DEST_BROWSER, 
+            // your html content input
+            'content' => $content,  
+            // format content from your own css file if needed or use the
+            // enhanced bootstrap css built by Krajee for mPDF formatting 
+            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
+            // any css to be embedded if required
+            'cssInline' => '.kv-heading-1{font-size:18px}', 
+             // set mPDF properties on the fly
+            'options' => ['title' => 'Krajee Report Title'],
+             // call mPDF methods on the fly
+            'methods' => [ 
+                'SetHeader'=>['Krajee Report Header'], 
+                'SetFooter'=>['{PAGENO}'],
+            ]
+        ]);
+
+        // return the pdf output as per the destination setting
+        return $pdf->render();
     }
 }
