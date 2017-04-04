@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MFaq */
 
-$this->title = 'Create Mfaq';
+$this->title = 'Create FAQ';
 $this->params['breadcrumbs'][] = ['label' => 'Mfaqs', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MTestimoni */
@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="mtestimoni-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
 
     <?= $form->field($model, 'testiNama')->textInput(['maxlength' => true]) ?>
 

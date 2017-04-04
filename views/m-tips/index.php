@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\MTipsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mtips';
+$this->title = 'Tips';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mtips-index">
