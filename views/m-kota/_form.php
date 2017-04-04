@@ -10,7 +10,10 @@ use yii\bootstrap\ActiveForm;
 
 <div class="kota-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+   <?php $form = ActiveForm::begin([
+        'id'=>$model->formName(),
+        'layout' => 'horizontal'
+    ]); ?>
 
     <?= $form->field($model, 'kotaNama')->textInput(['maxlength' => true]) ?>
 

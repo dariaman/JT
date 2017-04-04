@@ -47,6 +47,7 @@ class MKecamatanSearch extends MKecamatan
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=>false
         ]);
 
         $this->load($params);

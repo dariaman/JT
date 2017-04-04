@@ -7,8 +7,17 @@ use yii\widgets\DetailView;
 /* @var $model app\models\MShop */
 
 $this->title = $model->shopId;
-$this->params['breadcrumbs'][] = ['label' => 'Mshops', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'shop', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+function status($status){
+    if($status){
+         $active_inactive = '<span class="glyphicon glyphicon-ok"></span';
+    }else{
+        $active_inactive =  '<span class="glyphicon glyphicon-remove"></span';
+    }
+    return $active_inactive;
+};
+
 ?>
 <div class="mshop-view">
 
@@ -30,7 +39,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'shopId',
             'shopJudul',
-            'shopStatus',
+            // 'shopStatus',
+             [
+                'label'=>'Status',
+                'format'=>'raw',
+                'value'=>status($model->shopStatus)
+            ],
         ],
     ]) ?>
 

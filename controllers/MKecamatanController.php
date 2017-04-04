@@ -8,6 +8,8 @@ use app\models\MKecamatanSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\MKota;
+use yii\helpers\ArrayHelper;
 
 /**
  * MKecamatanController implements the CRUD actions for MKecamatan model.
@@ -37,6 +39,7 @@ class MKecamatanController extends Controller
     {
         $searchModel = new MKecamatanSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -56,6 +59,10 @@ class MKecamatanController extends Controller
         ]);
     }
 
+       public function ary_kota(){
+        return ArrayHelper::map(MKota::find()->all(),'kotaId','kotaNama');
+    }
+
     /**
      * Creates a new MKecamatan model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -70,6 +77,7 @@ class MKecamatanController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'data_kota'=>self::ary_kota()
             ]);
         }
     }
@@ -89,6 +97,7 @@ class MKecamatanController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                 'data_kota'=>self::ary_kota()
             ]);
         }
     }
