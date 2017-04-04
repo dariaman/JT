@@ -134,6 +134,15 @@ class TOrderController extends Controller
         }
     }
     
+    protected function findOrderDetail($id)
+    {
+        if (($model = TOrderDetail::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
     public function actionDetail($id)
     {
         $searchModel = new TOrderSearch();
@@ -161,6 +170,32 @@ class TOrderController extends Controller
         } else {
             return $this->render('create-detail', [
                 'model' => $model,
+            ]);
+        }
+    }
+
+    public function actionWo()
+    {
+        $searchModel = new TOrderSearch();
+        $dataProvider = $searchModel->searchWo(Yii::$app->request->queryParams);
+
+        return $this->render('wo', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    public function actionUpdateRekan($id)
+    {
+        $this->layout ='blank';
+        $model = $this->findOrderDetail($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
+            return $this->redirect(Yii::$app->request->post('back','/t-order/wo'));
+        } else {
+            return $this->render('_formUpdateRekan', [
+                'model' => $model,
+                'back'=> Yii::$app->request->referrer
             ]);
         }
     }

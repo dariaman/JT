@@ -21,8 +21,9 @@ $config = [
     ],
     'components' => [
         'user' => [
-            'identityClass' => 'mdm\admin\models\User',
-            'loginUrl' => ['admin/user/login'],
+//            'identityClass' => 'mdm\admin\models\User',
+//            'loginUrl' => ['admin/user/login'],
+            'identityClass' => 'app\models\User',
             'enableAutoLogin' => false,
             // 'layout' => [
             //     'default' => 'views\layouts\blank',
@@ -61,14 +62,12 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
-        /*
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'as beforeRequest' => [
         'class' => 'yii\filters\AccessControl',

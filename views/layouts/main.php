@@ -53,6 +53,7 @@ $bundle = yiister\gentelella\assets\Asset::register($this);
                                     ['label' => 'KartuDebit', 'url' => ['/m-kartu-debit'], "icon" => "files-o"],
                                     ['label' => 'Rekan JagoTukang', 'url' => ['/m-rekan-jt'], "icon" => "files-o"],
                                     ['label' => 'Order', 'url' => ['/t-order'], "icon" => "files-o"],
+                                    ['label' => 'Work Order', 'url' => ['/t-order/wo'], "icon" => "files-o"],
 
                                     // ["label" => "Layout", "url" => ["site/layout"], "icon" => "files-o"],
                                     // ["label" => "Error page", "url" => ["site/error-page"], "icon" => "close"],
