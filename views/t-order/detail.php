@@ -33,7 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'orderDetailStatus',
             'orderDetailQTY',
             'orderDetailProperti',
-
+            [
+                'header' => 'Download Work Order',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a('Print WO',['print-wo','id' => $data['orderDetailId'],'orderid' => $data['orderId']]);
+                }
+            ]
 //            ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
