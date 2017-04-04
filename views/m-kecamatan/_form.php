@@ -3,13 +3,14 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MKecamatan */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mkecamatan-form">
+<div class="kecamatan-form">
 
    <?php $form = ActiveForm::begin([
         'id'=>$model->formName(),

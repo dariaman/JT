@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MTips */
 
-$this->title = 'Create Mtips';
+$this->title = 'Create Tips';
 $this->params['breadcrumbs'][] = ['label' => 'Mtips', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

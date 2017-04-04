@@ -7,7 +7,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\MFaqSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mfaqs';
+$this->title = 'FAQ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mfaq-index">
@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'faqId',
             'faqJudul',
             'faqDeskripsi',
             'faqStatus',

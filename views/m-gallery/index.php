@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\MGallerySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mgalleries';
+$this->title = 'Galleries';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mgallery-index">
@@ -29,9 +29,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'galleriDeskripsi:ntext',
             'galleriTgl',
             'galleriGambarUrl:url',
-            // 'galleriDibuatTgl',
-            // 'galleriDibuatOleh',
-            // 'galleriStatus',
+            'galleriDibuatTgl',
+            'galleriDibuatOleh',
+            'galleriStatus',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

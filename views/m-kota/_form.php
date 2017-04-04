@@ -8,7 +8,7 @@ use yii\bootstrap\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="mkota-form">
+<div class="kota-form">
 
    <?php $form = ActiveForm::begin([
         'id'=>$model->formName(),
