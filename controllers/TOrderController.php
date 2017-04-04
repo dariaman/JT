@@ -77,7 +77,7 @@ class TOrderController extends Controller
             $model->orderTgl = $saveTgl.' '.$seconds;
             $model->userId = $userid;
             $model->save();
-            return $this->redirect(['detail','id' => $model->orderId]);
+            return $this->redirect(['create-detail','id' => $model->orderId]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -150,7 +150,10 @@ class TOrderController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             $request = Yii::$app->request->post('TOrderDetail');
-
+            $orderDetailTgl = $request['orderDetailTglKerja'];
+            $toDate = date('Y-m-d',strtotime($orderDetailTgl));
+            $model->orderId = Yii::$app->request->post('orderId');
+            $model->orderDetailTglKerja = $toDate;
             
             $model->save();
             return $this->redirect(['detail','id' => $model->orderId]);
