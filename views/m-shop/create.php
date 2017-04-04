@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MShop */
 
-$this->title = 'Create Mshop';
-$this->params['breadcrumbs'][] = ['label' => 'Mshops', 'url' => ['index']];
+$this->title = 'Create shop';
+$this->params['breadcrumbs'][] = ['label' => 'shop', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mshop-create">

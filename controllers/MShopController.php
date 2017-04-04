@@ -8,6 +8,7 @@ use app\models\MShopSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * MShopController implements the CRUD actions for MShop model.
@@ -37,6 +38,7 @@ class MShopController extends Controller
     {
         $searchModel = new MShopSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider->pagination->pageSize=10;
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -74,6 +76,13 @@ class MShopController extends Controller
         }
     }
 
+      public function ary_status(){
+        $ary_status =[['id'=>'1', 'status'=> 'Active'],
+            ['id'=>'0', 'status'=> 'InActive']
+        ];
+        return ArrayHelper::map($ary_status,'id','status');
+    }
+
     /**
      * Updates an existing MShop model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -89,6 +98,7 @@ class MShopController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'data_status'=>self::ary_status()
             ]);
         }
     }

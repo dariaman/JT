@@ -32,6 +32,18 @@ use yii\helpers\Url;
         ],
     ])->label('Service') ?>
 
+    <?= $form->field($model, 'serviceKategoriId')->widget(DepDrop::classname(), [
+        'type'=>DepDrop::TYPE_SELECT2,
+        'options'=>['placeholder'=>'Select ...'],
+        'select2Options'=>['pluginOptions'=>['allowClear'=>true]],
+        'pluginOptions'=>[
+            'depends'=>['mservicedetail-serviceid'],
+            'url'=>Url::toRoute(['/m-service-detail/list-kategori']),
+             'loadingText' => 'Loading  ...',
+              'initialize' => true,
+        ]
+    ])->label('Kategori Service') ?>
+
       <?php
     if(!$model->isNewRecord){
     ?>
