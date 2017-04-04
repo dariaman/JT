@@ -8,6 +8,8 @@ use yii\helpers\Url;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 $this->title = 'Service';
 $this->params['breadcrumbs'][] = $this->title;
+
+
 /*
  * Tombol Create
  *  create 

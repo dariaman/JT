@@ -55,9 +55,13 @@ class MServiceDetailController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
+
      public function ary_service(){
         return ArrayHelper::map(MService::find()->all(),'serviceId','serviceJudul');
     }
+
+
+    
      public function ary_status(){
         $ary_status =[['id'=>'1', 'status'=> 'Active'],
             ['id'=>'0', 'status'=> 'InActive']

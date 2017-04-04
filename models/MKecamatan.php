@@ -45,6 +45,14 @@ class MKecamatan extends \yii\db\ActiveRecord
         ];
     }
 
+     public function getKotaTbl(){
+            return $this->hasOne(MKota::className(), ['kotaId' => 'kotaId']);
+    }
+
+     public function getNamaKota(){
+         return $this->kotaTbl != '' ? $this->kotaTbl->kotaNama : 'none';
+    }
+
     /**
      * @inheritdoc
      * @return MKecamatanQuery the active query used by this AR class.

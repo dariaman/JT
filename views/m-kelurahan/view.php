@@ -30,8 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             'kelurahanId',
             'kelurahanNama',
-            'kecamatanId',
-            'hargaDaerah',
+            'namaKecamatan',
+            [
+                'label'=>'Harga',
+                'value'=> 'RP '.number_format($model->hargaDaerah,2),
+            ],
+          
         ],
     ]) ?>
 
