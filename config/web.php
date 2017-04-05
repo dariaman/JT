@@ -20,6 +20,13 @@ $config = [
         ],
     ],
     'components' => [
+//        'view' => [
+//            'theme' => [
+//                'pathMap' => [
+//                   '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
+//                ],
+//            ],
+//       ],
         'user' => [
 //            'identityClass' => 'mdm\admin\models\User',
 //            'loginUrl' => ['admin/user/login'],
@@ -62,10 +69,32 @@ $config = [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+//        'urlManager' => [
+//            'class' => 'yii\web\UrlManager',
+//            // Disable index.php
+//            'showScriptName' => false,
+//            // Disable r= routes
+//            'enablePrettyUrl' => true,
+//            'rules' => array(
+//                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
+//                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+//                    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+//            ),
+//        ],
         'urlManager' => [
+            'class' => 'codemix\localeurls\UrlManager',
+//            'languages' => ['en'],
+//            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+            ],
+        ],
+        'assetManager' => [
+            'bundles' => [
+                'dmstr\web\AdminLteAsset' => [
+                    'skin' => 'skin-blue',
+                ],
             ],
         ],
     ],
