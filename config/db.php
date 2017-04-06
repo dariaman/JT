@@ -2,10 +2,13 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=127.0.0.1;dbname=jt',
-    
+    'dsn' => 'mysql:host=127.0.0.1;dbname=jt',    
     'username' => 'root',
-    'password' => '',
+    'password' => 'C3ntos@2017',
+    
+//    'dsn' => 'mysql:host=localhost;dbname=jt',    
+//    'username' => 'root',
+//    'password' => '',
 
 	'enableSchemaCache' => true,
 	// Name of the cache component used to store schema information
