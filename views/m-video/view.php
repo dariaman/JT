@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\MVideo */
 
 $this->title = $model->videoId;
-$this->params['breadcrumbs'][] = ['label' => 'Mvideos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Videos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mvideo-view">
