@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MVideoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mvideos';
+$this->title = 'Videos';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mvideo-index">
@@ -15,20 +15,29 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Mvideo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'videoId',
             'videoUrl:url',
-            'videoStatus',
+            [
+                'class' => '\kartik\grid\BooleanColumn',
+                'header' => 'Video Status',
+                'trueLabel' => 'Yes', 
+                'falseLabel' => 'No',
+                'value' => function($data)
+                {
+                    return $data['videoStatus'];
+                }
+            ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}'],
         ],
     ]); ?>
+    
+    <p>
+        <?= Html::a('Tambah Video', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>

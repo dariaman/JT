@@ -31,6 +31,7 @@
                 'options' => ['class' => 'sidebar-menu'],
                 'items' => [
                     ['label' => 'Gallery', 'url' => ['/m-gallery'], "icon" => "files-o"],
+                    ['label' => 'Video', 'url' => ['/m-video'], "icon" => "files-o"],
                     ['label' => 'InternetBanking', 'url' => ['/m-internet-banking'], "icon" => "files-o"],
                     ['label' => 'KartuDebit', 'url' => ['/m-kartu-debit'], "icon" => "files-o"],
                     ['label' => 'Rekan JagoTukang', 'url' => ['/m-rekan-jt'], "icon" => "files-o"],
