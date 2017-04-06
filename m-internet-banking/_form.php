@@ -10,11 +10,28 @@ use yii\bootstrap\ActiveForm;
 
 <div class="minternet-banking-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal',]); ?>
+  <?php $form = ActiveForm::begin([
+    'id'=>$model->formName()
+   'layout' => 'horizontal'
+
+   ]); ?>
+
 
     <?= $form->field($model, 'ibankJudul')->textInput(['maxlength' => true]) ?>
 
+
+      <?php
+    if(!$model->isNewRecord){
+    ?>
+
+
     <?= $form->field($model, 'ibankStatus')->checkbox(); ?>
+
+    <?php
+}
+
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

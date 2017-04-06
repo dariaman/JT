@@ -4,19 +4,19 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\MEventsSearch */
+/* @var $searchModel app\models\MInternetBankingSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mevents';
+$this->title = 'Minternet Bankings';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="mevents-index">
+<div class="minternet-banking-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Mevents', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create Minternet Banking', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,14 +24,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'eventId',
-            'eventJudul',
-            'eventDeskripsi:ntext',
-            'eventTgl',
-            'eventGambarUrl:url',
-            // 'eventDibuatTgl',
-            // 'eventDibuatOleh',
-            // 'eventStatus',
+            'ibankId',
+            'ibankJudul',
+            'ibankStatus',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

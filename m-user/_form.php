@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MUser */
@@ -10,7 +10,11 @@ use yii\widgets\ActiveForm;
 
 <div class="muser-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id'=>$model->formName()
+        'layout' => 'horizontal'
+
+   ]); ?>
 
     <?= $form->field($model, 'userEmail')->textInput(['maxlength' => true]) ?>
 
@@ -38,7 +42,18 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'userNoHp')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'userStatus')->textInput(['maxlength' => true]) ?>
+     <?php
+    if(!$model->isNewRecord){
+    ?>
+
+
+    <?= $form->field($model, 'userStatus')->checkbox(); ?>
+
+    <?php
+}
+
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
