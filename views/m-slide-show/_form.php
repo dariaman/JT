@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MSlideShow */
@@ -10,11 +10,26 @@ use yii\widgets\ActiveForm;
 
 <div class="mslide-show-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+   <?php $form = ActiveForm::begin([
+        'id'=>$model->formName()
+        'layout' => 'horizontal'
+
+   ]); ?>
 
     <?= $form->field($model, 'slideUrl')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'slideStatus')->textInput(['maxlength' => true]) ?>
+    <?php
+    if(!$model->isNewRecord){
+    ?>
+
+
+    <?= $form->field($model, 'slideStatus')->checkbox(); ?>
+
+    <?php
+}
+
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

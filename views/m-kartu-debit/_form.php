@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-use yii\helpers\ArrayHelper;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MKartuDebitKredit */
@@ -11,11 +10,27 @@ use yii\helpers\ArrayHelper;
 
 <div class="mkartu-debit-kredit-form">
 
-    <?php $form = ActiveForm::begin(['layout' => 'horizontal']); ?>
+    <?php $form = ActiveForm::begin([
+	    'id'=>$model->formName()
+	   'layout' => 'horizontal'
+
+   ]); ?>
 
     <?= $form->field($model, 'kartuJudul')->textInput(['maxlength' => true]) ?>
 
-<?= $form->field($model, 'kartuStatus')->checkbox(); ?>
+
+      <?php
+    if(!$model->isNewRecord){
+    ?>
+
+
+    <?= $form->field($model, 'kartuStatus')->checkbox(); ?>
+
+    <?php
+}
+
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
