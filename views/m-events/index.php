@@ -1,14 +1,23 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MEventsSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mevents';
+$this->title = 'event';
 $this->params['breadcrumbs'][] = $this->title;
+
+#status 
+  function Status($model){
+      if ($model->eventStatus == 1){
+            return html::label('<span class="glyphicon glyphicon-ok"></span>','',['style'=>['color'=>'green']]);
+        }else if($model->eventStatus == 0){
+            return html::label('<span class="glyphicon glyphicon-remove"></span>','',['style'=>['color'=>'red']]);
+       }
+  }
 ?>
 <div class="mevents-index">
 
@@ -16,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Mevents', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Create event', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -29,6 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             'eventDeskripsi:ntext',
             'eventTgl',
             'eventGambarUrl:url',
+             [
+                'label'=>'Status',
+                'attribute'=>'eventStatus',
+                'format'=>'raw',
+                'value'=>function($model){
+                        return Status($model);
+                },
+            ],
             // 'eventDibuatTgl',
             // 'eventDibuatOleh',
             // 'eventStatus',

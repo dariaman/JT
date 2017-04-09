@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MAdmin */
@@ -11,13 +11,13 @@ use yii\widgets\ActiveForm;
 <div class="madmin-form">
 
     <?php $form = ActiveForm::begin([
-	    'id'=>$model->formName()
+	    'id'=>$model->formName(),
 	   'layout' => 'horizontal'
 
    ]); ?>
 
 
-    <?= $form->field($model, 'adminPassword')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'adminPassword')->passwordInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'adminNama')->textInput(['maxlength' => true]) ?>
 
