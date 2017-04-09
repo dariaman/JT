@@ -28,11 +28,12 @@ class MAdmin extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['adminId', 'adminPassword', 'adminNama', 'adminStatus'], 'required'],
+            [['adminPassword', 'adminNama'], 'required'],
+            [['adminStatus'],'default','value'=>1],
             [['adminId'], 'string', 'max' => 10],
             [['adminPassword'], 'string', 'max' => 200],
             [['adminNama'], 'string', 'max' => 100],
-            [['adminStatus'], 'string', 'max' => 1],
+            // [['adminStatus'], 'string', 'max' => 1],
         ];
     }
 

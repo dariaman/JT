@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\MAdmin */
 
-$this->title = 'Create Madmin';
-$this->params['breadcrumbs'][] = ['label' => 'Madmins', 'url' => ['index']];
+$this->title = 'Create Admin';
+$this->params['breadcrumbs'][] = ['label' => 'admin', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="madmin-create">
