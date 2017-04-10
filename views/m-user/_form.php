@@ -10,7 +10,11 @@ use yii\bootstrap\ActiveForm;
 
 <div class="muser-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+        'id'=>$model->formName()
+        'layout' => 'horizontal'
+
+   ]); ?>
 
     <?= $form->field($model, 'userEmail')->textInput(['maxlength' => true]) ?>
 

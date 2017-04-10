@@ -12,9 +12,8 @@ use kartik\date\DatePicker;
 <div class="mevents-form">
 
    <?php $form = ActiveForm::begin([
-    'id'=>$model->formName(),
-   'layout' => 'horizontal'
-
+    'id'=>$model->formName()
+    'layout' => 'horizontal'
    ]); ?>
 
 
@@ -37,10 +36,11 @@ use kartik\date\DatePicker;
     ?>
 
 
+
     <?= $form->field($model, 'eventStatus')->checkbox() ?>
 
     <?php
-}
+    }
 
     ?>
 
