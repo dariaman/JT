@@ -10,15 +10,29 @@ use yii\widgets\ActiveForm;
 
 <div class="madmin-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+	    'id'=>$model->formName()
+	   'layout' => 'horizontal'
 
-    <?= $form->field($model, 'adminId')->textInput(['maxlength' => true]) ?>
+   ]); ?>
+
 
     <?= $form->field($model, 'adminPassword')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'adminNama')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'adminStatus')->textInput(['maxlength' => true]) ?>
+      <?php
+    if(!$model->isNewRecord){
+    ?>
+
+
+   <?= $form->field($model, 'adminStatus')->checkbox(); ?>
+
+    <?php
+}
+
+    ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
