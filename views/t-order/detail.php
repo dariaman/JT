@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\TOrderSearch */
@@ -38,6 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
                 'value' => function($data){
                     return Html::a('Print WO',['print-wo','id' => $data['orderDetailId'],'orderid' => $data['orderId']]);
+                }
+            ],
+            [
+                'header' => 'Download Invoice',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a('Print Invoice',['print-inv','id' => $data['orderDetailId'],'orderid' => $data['orderId']]);
                 }
             ]
 //            ['class' => 'yii\grid\ActionColumn'],
