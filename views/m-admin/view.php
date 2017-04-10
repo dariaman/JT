@@ -7,8 +7,18 @@ use yii\widgets\DetailView;
 /* @var $model app\models\MAdmin */
 
 $this->title = $model->adminId;
-$this->params['breadcrumbs'][] = ['label' => 'Madmins', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'admin', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+
+function status($status){
+    if($status){
+         $active_inactive = '<span class="glyphicon glyphicon-ok"></span';
+    }else{
+        $active_inactive =  '<span class="glyphicon glyphicon-remove"></span';
+    }
+    return $active_inactive;
+};
+
 ?>
 <div class="madmin-view">
 
@@ -31,7 +41,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'adminId',
             'adminPassword',
             'adminNama',
-            'adminStatus',
+             [
+                'label'=>'Status',
+                'format'=>'raw',
+                'value'=>status($model->adminStatus)
+            ],
+            // 'adminStatus',
         ],
     ]) ?>
 

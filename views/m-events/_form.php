@@ -13,8 +13,7 @@ use kartik\date\DatePicker;
 
    <?php $form = ActiveForm::begin([
     'id'=>$model->formName()
-   'layout' => 'horizontal'
-
+    'layout' => 'horizontal'
    ]); ?>
 
 
@@ -37,10 +36,11 @@ use kartik\date\DatePicker;
     ?>
 
 
-    <?= $form->field($model, 'eventStatus')->textInput(['maxlength' => true]) ?>
+
+    <?= $form->field($model, 'eventStatus')->checkbox() ?>
 
     <?php
-}
+    }
 
     ?>
 
