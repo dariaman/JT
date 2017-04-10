@@ -11,11 +11,9 @@ use yii\bootstrap\ActiveForm;
 <div class="madmin-form">
 
     <?php $form = ActiveForm::begin([
-	    'id'=>$model->formName(),
+	    'id'=>$model->formName()
 	   'layout' => 'horizontal'
-
    ]); ?>
-
 
     <?= $form->field($model, 'adminPassword')->passwordInput(['maxlength' => true]) ?>
 
