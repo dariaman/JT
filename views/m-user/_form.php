@@ -10,11 +10,7 @@ use yii\bootstrap\ActiveForm;
 
 <div class="muser-form">
 
-    <?php $form = ActiveForm::begin([
-        'id'=>$model->formName()
-        'layout' => 'horizontal'
-
-   ]); ?>
+    <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'userEmail')->textInput(['maxlength' => true]) ?>
 
@@ -53,7 +49,6 @@ use yii\bootstrap\ActiveForm;
 }
 
     ?>
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

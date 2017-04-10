@@ -65,7 +65,13 @@ class MEventsController extends Controller
     {
         $model = new MEvents();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+
+            $model->eventDibuatOleh = Yii::$app->user->identity->id;
+            $model->eventDibuatTgl = date('Y-m-d');
+            $model->save();
+
+            
             return $this->redirect(['view', 'id' => $model->eventId]);
         } else {
             return $this->render('create', [
