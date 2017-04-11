@@ -29,16 +29,18 @@ class MGallery extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $pic;
     public function rules()
     {
         return [
-            [['galleriJudul', 'galleriDeskripsi', 'galleriTgl', 'galleriGambarUrl', 'galleriDibuatOleh', 'galleriStatus'], 'required'],
+            [['galleriJudul', 'galleriDeskripsi', 'galleriTgl', 'galleriDibuatOleh', 'galleriStatus'], 'required'],
             [['galleriId'], 'integer'],
             [['galleriDeskripsi'], 'string'],
             [['galleriTgl', 'galleriDibuatTgl'], 'safe'],
             [['galleriJudul'], 'string', 'max' => 100],
-            [['galleriGambarUrl', 'galleriDibuatOleh'], 'string', 'max' => 200],
+            [['galleriDibuatOleh','galleriGambarUrl'], 'string', 'max' => 500],
             [['galleriStatus'], 'string', 'max' => 1],
+            [['pic'], 'file'],
         ];
     }
 

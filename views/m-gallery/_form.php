@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\widgets\DatePicker;
-use kartik\datecontrol\DateControl;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MGallery */
@@ -13,7 +13,8 @@ use kartik\datecontrol\DateControl;
 <div class="gallery-form">
 
     <?php $form = ActiveForm::begin([
-    'layout' => 'horizontal',]); ?>
+        'options' => ['enctype' => 'multipart/form-data'],
+        'layout' => 'horizontal',]); ?>
 
     <?= $form->field($model, 'galleriJudul')->textInput(['maxlength' => true]) ?>
 
@@ -21,14 +22,18 @@ use kartik\datecontrol\DateControl;
 
 <?= $form->field($model, 'galleriTgl')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Tgl Galery'],
+        'type' => DatePicker::TYPE_INPUT,
         'pluginOptions' => [
             'autoclose'=>true,
-            'format' => 'dd M yyyy'
+            'format' => 'yyyy-mm-d'
     ]])?>
 
-    <?= $form->field($model, 'galleriGambarUrl')->textInput(['maxlength' => true]) ?>
+<?= $form->field($model, 'pic')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+    ])
+?>
 
-    <?= $form->field($model, 'galleriStatus')->checkbox(); ?>
+    <?= $model->isNewRecord ? '' : $form->field($model, 'galleriStatus')->checkbox() ?>
 
 
     <div class="form-group">
