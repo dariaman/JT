@@ -13,6 +13,7 @@ use kartik\file\FileInput;
 <div class="gallery-form">
 
     <?php $form = ActiveForm::begin([
+        'id'=>$model->formName(),
         'options' => ['enctype' => 'multipart/form-data'],
         'layout' => 'horizontal',]); ?>
 

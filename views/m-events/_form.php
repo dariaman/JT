@@ -26,7 +26,8 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'eventTgl')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Enter  date ...'],
         'pluginOptions' => [
-            'autoclose'=>true
+            'autoclose'=>true,
+            'format' => 'yyyy-mm-d'
         ]
     ]) ?>
     
