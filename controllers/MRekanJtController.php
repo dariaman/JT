@@ -65,7 +65,8 @@ class MRekanJtController extends Controller
     {
         $model = new MRekanJt();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
             return $this->redirect(['view', 'id' => $model->rekanId]);
         } else {
             return $this->render('create', [
@@ -84,8 +85,9 @@ class MRekanJtController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->rekanId]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->save();
+            return $this->redirect(['update', 'id' => $model->rekanId]);
         } else {
             return $this->render('update', [
                 'model' => $model,
