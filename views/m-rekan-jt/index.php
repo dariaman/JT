@@ -28,9 +28,21 @@ $this->params['breadcrumbs'][] = $this->title;
             'rekanAlamat',
             'rekanEmail:email',
             'rekanWebsite',
-            'rekanKota',
-            'rekanKelurahan',
-            'rekanKecamatan',
+            [
+                'header' => 'Nama Kota',
+                'attribute' => 'rekanKota',
+                'value' => 'kotaNama'
+            ],
+            [
+                'header' => 'Nama Kelurahan',
+                'attribute' => 'rekanKelurahan',
+                'value' => 'kelurahanNama'
+            ],
+            [
+                'header' => 'Nama Kecamatan',
+                'attribute' => 'rekanKecamatan',
+                'value' => 'kecamatanNama'
+            ],
             'rekanDaerah',
             'rekanKodePos',
             'rekanNoHp',
