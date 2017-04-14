@@ -29,6 +29,10 @@ class MRekanJt extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $kotaNama;
+    public $kecamatanNama;
+    public $kelurahanNama;
+    
     public static function tableName()
     {
         return 'm_rekan_jt';
@@ -58,22 +62,22 @@ class MRekanJt extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'rekanId' => 'Rekan ID',
-            'rekanNamaLengkap' => 'Rekan Nama Lengkap',
-            'rekanKelamin' => 'Rekan Kelamin',
-            'rekanSpesifikasi' => 'Rekan Spesifikasi',
-            'rekanAlamat' => 'Rekan Alamat',
-            'rekanEmail' => 'Rekan Email',
-            'rekanWebsite' => 'Rekan Website',
-            'rekanKota' => 'Rekan Kota',
-            'rekanKelurahan' => 'Rekan Kelurahan',
-            'rekanKecamatan' => 'Rekan Kecamatan',
-            'rekanDaerah' => 'Rekan Daerah',
-            'rekanKodePos' => 'Rekan Kode Pos',
-            'rekanNoHp' => 'Rekan No Hp',
-            'rekanKendaraan' => 'Rekan Kendaraan',
-            'rekanKendaraanNopol' => 'Rekan Kendaraan Nopol',
-            'rekanStatus' => 'Rekan Status',
+            'rekanId' => 'ID',
+            'rekanNamaLengkap' => 'Nama Lengkap',
+            'rekanKelamin' => 'Jenis Kelamin',
+            'rekanSpesifikasi' => 'Spesifikasi',
+            'rekanAlamat' => 'Alamat',
+            'rekanEmail' => 'Email',
+            'rekanWebsite' => 'Website',
+            'rekanKota' => 'Kota',
+            'rekanKelurahan' => 'Kelurahan',
+            'rekanKecamatan' => 'Kecamatan',
+            'rekanDaerah' => 'Daerah',
+            'rekanKodePos' => 'Kode Pos',
+            'rekanNoHp' => 'No Hp',
+            'rekanKendaraan' => 'Kendaraan',
+            'rekanKendaraanNopol' => 'Kendaraan Nopol',
+            'rekanStatus' => 'Status',
         ];
     }
 

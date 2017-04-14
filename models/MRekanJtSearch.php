@@ -41,7 +41,13 @@ class MRekanJtSearch extends MRekanJt
      */
     public function search($params)
     {
-        $query = MRekanJt::find();
+        $query = MRekanJt::find()
+                ->select('*')
+                ->from('m_rekan_jt mjt')
+                ->leftJoin('m_kota mk','mk.kotaId = mjt.rekanKota')
+                ->leftJoin('m_kecamatan mkc','mkc.kecamatanId = mjt.rekanKecamatan')
+                ->leftJoin('m_kelurahan mkl','mkl.kelurahanId = mjt.rekanKelurahan')
+                ;
 
         // add conditions that should always apply here
 
@@ -68,9 +74,9 @@ class MRekanJtSearch extends MRekanJt
             ->andFilterWhere(['like', 'rekanAlamat', $this->rekanAlamat])
             ->andFilterWhere(['like', 'rekanEmail', $this->rekanEmail])
             ->andFilterWhere(['like', 'rekanWebsite', $this->rekanWebsite])
-            ->andFilterWhere(['like', 'rekanKota', $this->rekanKota])
-            ->andFilterWhere(['like', 'rekanKelurahan', $this->rekanKelurahan])
-            ->andFilterWhere(['like', 'rekanKecamatan', $this->rekanKecamatan])
+            ->andFilterWhere(['like', 'kotaNama', $this->rekanKota])
+            ->andFilterWhere(['like', 'kelurahanNama', $this->rekanKelurahan])
+            ->andFilterWhere(['like', 'kecamatanNama', $this->rekanKecamatan])
             ->andFilterWhere(['like', 'rekanDaerah', $this->rekanDaerah])
             ->andFilterWhere(['like', 'rekanKodePos', $this->rekanKodePos])
             ->andFilterWhere(['like', 'rekanNoHp', $this->rekanNoHp])
