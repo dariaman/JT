@@ -11,7 +11,7 @@ use yii\bootstrap\ActiveForm;
 <div class="minternet-banking-form">
 
   <?php $form = ActiveForm::begin([
-    'id'=>$model->formName()
+    'id'=>$model->formName(),
    'layout' => 'horizontal'
 
    ]); ?>
