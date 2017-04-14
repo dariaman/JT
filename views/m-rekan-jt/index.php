@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MRekanJtSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mrekan Jts';
+$this->title = 'Rekan JT';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mrekan-jt-index">
@@ -15,9 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Mrekan Jt', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -29,19 +26,23 @@ $this->params['breadcrumbs'][] = $this->title;
             'rekanKelamin',
             'rekanSpesifikasi',
             'rekanAlamat',
-            // 'rekanEmail:email',
-            // 'rekanWebsite',
-            // 'rekanKota',
-            // 'rekanKelurahan',
-            // 'rekanKecamatan',
-            // 'rekanDaerah',
-            // 'rekanKodePos',
-            // 'rekanNoHp',
-            // 'rekanKendaraan',
-            // 'rekanKendaraanNopol',
-            // 'rekanStatus',
+            'rekanEmail:email',
+            'rekanWebsite',
+            'rekanKota',
+            'rekanKelurahan',
+            'rekanKecamatan',
+            'rekanDaerah',
+            'rekanKodePos',
+            'rekanNoHp',
+            'rekanKendaraan',
+            'rekanKendaraanNopol',
+            'rekanStatus',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}'],
         ],
     ]); ?>
+    
+    <p>
+        <?= Html::a('Tambah Rekan JT', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
