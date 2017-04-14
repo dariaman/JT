@@ -20,7 +20,7 @@ use kartik\file\FileInput;
 
     <?= $form->field($model, 'galleriDeskripsi')->textarea(['rows' => 6]) ?>
 
-<?= $form->field($model, 'galleriTgl')->widget(DatePicker::classname(), [
+    <?= $form->field($model, 'galleriTgl')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Tgl Galery'],
         'type' => DatePicker::TYPE_INPUT,
         'pluginOptions' => [
@@ -28,10 +28,11 @@ use kartik\file\FileInput;
             'format' => 'yyyy-mm-d'
     ]])?>
 
-<?= $form->field($model, 'pic')->widget(FileInput::classname(), [
-        'options' => ['accept' => 'image/*'],
-    ])
-?>
+    <?= $form->field($model, 'pic')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*'],
+            'pluginOptions' => ['showUpload' => false]
+        ])
+    ?>
 
     <?= $model->isNewRecord ? '' : $form->field($model, 'galleriStatus')->checkbox() ?>
 

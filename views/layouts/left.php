@@ -35,6 +35,9 @@
                     ['label' => 'InternetBanking', 'url' => ['/m-internet-banking'], "icon" => "files-o"],
                     ['label' => 'KartuDebit', 'url' => ['/m-kartu-debit'], "icon" => "files-o"],
                     ['label' => 'Rekan JagoTukang', 'url' => ['/m-rekan-jt'], "icon" => "files-o"],
+                    ['label' => 'Customer', 'url' => ['/m-user'], "icon" => "user"],
+                    ['label' => 'Event', 'url' => ['/m-events'], "icon" => "files-o"],
+                    ['label' => 'Promo', 'url' => ['/m-promo'], "icon" => "files-o"],
                     ['label' => 'Order', 'url' => ['/t-order'], "icon" => "files-o"],
                     ['label' => 'Work Order', 'url' => ['/t-order/wo'], "icon" => "files-o"],
                     [

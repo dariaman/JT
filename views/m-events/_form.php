@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\date\DatePicker;
-
+use kartik\file\FileInput;
 /* @var $this yii\web\View */
 /* @var $model app\models\MEvents */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,6 +12,7 @@ use kartik\date\DatePicker;
 <div class="mevents-form">
 
    <?php $form = ActiveForm::begin([
+    'options' => ['enctype' => 'multipart/form-data'],   
     'id'=>$model->formName(),
     'layout' => 'horizontal'
    ]); ?>
@@ -28,10 +29,14 @@ use kartik\date\DatePicker;
             'autoclose'=>true
         ]
     ]) ?>
-
-    <?= $form->field($model, 'eventGambarUrl')->textInput(['maxlength' => true]) ?>
-
-      <?php
+    
+    <?= $form->field($model, 'pic')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*'],
+            'pluginOptions' => ['showUpload' => false]
+        ])
+    ?>
+    
+    <?php
     if(!$model->isNewRecord){
     ?>
 
