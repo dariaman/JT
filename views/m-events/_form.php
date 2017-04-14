@@ -12,7 +12,7 @@ use kartik\date\DatePicker;
 <div class="mevents-form">
 
    <?php $form = ActiveForm::begin([
-    'id'=>$model->formName()
+    'id'=>$model->formName(),
     'layout' => 'horizontal'
    ]); ?>
 
