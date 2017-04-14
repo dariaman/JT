@@ -29,6 +29,7 @@ class MEvents extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $pic;
     public function rules()
     {
         return [
@@ -39,6 +40,7 @@ class MEvents extends \yii\db\ActiveRecord
             [['eventTgl', 'eventDibuatTgl'], 'safe'],
             [['eventJudul'], 'string', 'max' => 100],
             [['eventGambarUrl', 'eventDibuatOleh'], 'string', 'max' => 200],
+            [['pic'], 'file'],
             // [['eventStatus'], 'string', 'max' => 1],
         ];
     }
