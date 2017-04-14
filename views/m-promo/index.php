@@ -1,13 +1,13 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\MPromoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Mpromos';
+$this->title = 'Promo';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="mpromo-index">
@@ -15,9 +15,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Mpromo', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -33,7 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'promoDibuatOleh',
             // 'promoStatus',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}'],
         ],
     ]); ?>
+    
+    <p>
+        <?= Html::a('Tambah Promo', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 </div>
