@@ -51,12 +51,12 @@ class MServiceController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-     public function ary_status(){
-        $ary_status =[['id'=>'1', 'status'=> 'Active'],
-            ['id'=>'0', 'status'=> 'InActive']
-        ];
-        return ArrayHelper::map($ary_status,'id','status');
-    }
+//     public function ary_status(){
+//        $ary_status =[['id'=>'1', 'status'=> 'Active'],
+//            ['id'=>'0', 'status'=> 'InActive']
+//        ];
+//        return ArrayHelper::map($ary_status,'id','status');
+//    }
     /**
      * Creates a new MService model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -66,7 +66,7 @@ class MServiceController extends Controller
     {
         $model = new MService();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->serviceId]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -83,11 +83,10 @@ class MServiceController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->serviceId]);
+            return $this->redirect(['update', 'id' => $model->serviceId]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'data_status'=>self::ary_status()
             ]);
         }
     }

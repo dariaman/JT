@@ -8,6 +8,7 @@ use app\models\MPromoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * MPromoController implements the CRUD actions for MPromo model.
@@ -65,8 +66,17 @@ class MPromoController extends Controller
     {
         $model = new MPromo();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->promoId]);
+        if ($model->load(Yii::$app->request->post())) {
+            $model->promoGambarUrl = UploadedFile::getInstance($model, 'pic');
+            $img = Yii::$app->security->generateRandomString();
+
+            $nama = $img . '.' . $model->promoGambarUrl->extension;
+            $model->promoGambarUrl->saveAs(Yii::$app->params['uploadGalery'] . $nama);
+            $model->promoGambarUrl = $nama;
+            $model->promoDibuatOleh = Yii::$app->user->identity->id;
+            $model->promoDibuatTgl = date('Y-m-d');
+            $model->save(false);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,

@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 use kartik\date\DatePicker;
+use kartik\file\FileInput;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\MPromo */
@@ -12,6 +13,7 @@ use kartik\date\DatePicker;
 <div class="mpromo-form">
 
     <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data'],
         'id'=>$model->formName(),
         'layout' => 'horizontal'
 
@@ -25,12 +27,17 @@ use kartik\date\DatePicker;
      <?= $form->field($model, 'promoTgl')->widget(DatePicker::classname(), [
         'options' => ['placeholder' => 'Enter  date ...'],
         'pluginOptions' => [
-            'autoclose'=>true
+            'autoclose'=>true,
+            'format' => 'yyyy-mm-d'
         ]
     ]) ?>
 
 
-    <?= $form->field($model, 'promoGambarUrl')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'pic')->widget(FileInput::classname(), [
+            'options' => ['accept' => 'image/*'],
+            'pluginOptions' => ['showUpload' => false]
+        ])
+    ?>
 
 
  <?php
