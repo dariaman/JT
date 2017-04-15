@@ -53,17 +53,17 @@ class MServiceKategoriController extends Controller
         ]);
     }
    
-    public function ary_service(){
-        return ArrayHelper::map(MService::find()->all(),'serviceId','serviceJudul');
-    }
-
-    
-    public function ary_status(){
-        $ary_status =[['id'=>'1', 'status'=> 'Active'],
-            ['id'=>'0', 'status'=> 'InActive']
-        ];
-        return ArrayHelper::map($ary_status,'id','status');
-    }
+//    public function ary_service(){
+//        return ArrayHelper::map(MService::find()->all(),'serviceId','serviceJudul');
+//    }
+//
+//    
+//    public function ary_status(){
+//        $ary_status =[['id'=>'1', 'status'=> 'Active'],
+//            ['id'=>'0', 'status'=> 'InActive']
+//        ];
+//        return ArrayHelper::map($ary_status,'id','status');
+//    }
     /**
      * Creates a new MServiceKategori model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -73,11 +73,11 @@ class MServiceKategoriController extends Controller
     {
         $model = new MServiceKategori();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->serviceKategoriId]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'data_service' => self::ary_service()
+//                'data_service' => self::ary_service()
             ]);
         }
     }
@@ -91,12 +91,12 @@ class MServiceKategoriController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->serviceKategoriId]);
+            return $this->redirect(['update', 'id' => $model->serviceKategoriId]);
         } else {
             return $this->render('update', [
                 'model' => $model,
-                'data_service' => self::ary_service(),
-                'data_status'=>self::ary_status()
+//                'data_service' => self::ary_service(),
+//                'data_status'=>self::ary_status()
             ]);
         }
     }
