@@ -77,9 +77,16 @@ $kecamatan = ArrayHelper::map(app\models\MKecamatan::find()->asArray()->all(), '
 
     <?= $form->field($model, 'rekanKendaraanNopol')->textInput(['maxlength' => true]) ?>
 
+    <?php
+    if(!$model->isNewRecord){
+    ?>
 
-    <?= $form->field($model, 'rekanStatus')->checkbox(); ?>
+    <?= $form->field($model, 'rekanStatus')->checkbox() ?>
 
+    <?php
+    }
+
+    ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
