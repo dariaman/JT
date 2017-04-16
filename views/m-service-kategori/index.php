@@ -32,7 +32,11 @@ function Status($model){
 //            'serviceKategoriId',
             'serviceKategoriJudul',
             'serviceKategoriGambarUrl:url',
-            'serviceId',
+            [
+                'header' => 'Service',
+                'attribute' => 'serviceId',
+                'value' => 'serviceJudul'
+            ],
             [
                 'label'=>'Status',
                 'attribute'=>'serviceKategoriStatus',
