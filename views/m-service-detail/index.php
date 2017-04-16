@@ -33,8 +33,16 @@ function Status($model){
             'serviceDetailJudul',
             'serviceDetailDeskripsi:ntext',
             'serviceDetailGambar',
-            'serviceKategoriId',
-            'serviceId',
+            [
+                'header' => 'Service Kategori',
+                'attribute' => 'serviceKategoriId',
+                'value' => 'serviceKategoriJudul'
+            ],
+            [
+                'header' => 'Service',
+                'attribute' => 'serviceId',
+                'value' => 'serviceJudul'
+            ],
             [
                 'label'=>'Status',
                 'attribute'=>'serviceDetailStatus',
