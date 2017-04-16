@@ -53,9 +53,9 @@ class MKapasitasDetailController extends Controller
         ]);
     }
 
-      public function ary_service_detail(){
-        return ArrayHelper::map(MServiceDetail::find()->all(),'serviceDetailId','serviceDetailJudul');
-    }
+//      public function ary_service_detail(){
+//        return ArrayHelper::map(MServiceDetail::find()->all(),'serviceDetailId','serviceDetailJudul');
+//    }
 
     
     public function ary_status(){
@@ -73,11 +73,11 @@ class MKapasitasDetailController extends Controller
     {
         $model = new MKapasitasDetail();
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-            return $this->redirect(['view', 'id' => $model->kapasitasId]);
+            return $this->redirect(['index']);
         } else {
             return $this->render('create', [
                 'model' => $model,
-                'data_service_detail'=>self::ary_service_detail()
+//                'data_service_detail'=>self::ary_service_detail()
             ]);
         }
     }
@@ -91,12 +91,10 @@ class MKapasitasDetailController extends Controller
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->save(false)) {
-            return $this->redirect(['view', 'id' => $model->kapasitasId]);
+            return $this->redirect(['update', 'id' => $model->kapasitasId]);
         } else {
             return $this->render('update', [
-                'model' => $model,
-                'data_status'=>self::ary_status(),
-                'data_service_detail'=>self::ary_service_detail()
+                'model' => $model
             ]);
         }
     }
