@@ -1,24 +1,24 @@
 <?php
+
 use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use kartik\grid\GridView;
-use yii\helpers\Url;
+
 /* @var $this yii\web\View */
-/* @var $searchModel app\models\MServiceKategoriSearch */
+/* @var $searchModel app\models\MOfficeHourSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Service Kategori';
+$this->title = 'Office Hour';
 $this->params['breadcrumbs'][] = $this->title;
 
 function Status($model){
-    if ($model->serviceKategoriStatus == 1){
+    if ($model->officeHourStatus == 1){
           return html::label('<span class="glyphicon glyphicon-ok"></span>','',['style'=>['color'=>'green']]);
-      }else if($model->serviceKategoriStatus == 0){
+      }else if($model->officeHourStatus == 0){
           return html::label('<span class="glyphicon glyphicon-remove"></span>','',['style'=>['color'=>'red']]);
      }
 }
 ?>
-<div class="mservice-kategori-index">
+<div class="moffice-hour-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -29,17 +29,12 @@ function Status($model){
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-//            'serviceKategoriId',
-            'serviceKategoriJudul',
-            'serviceKategoriGambarUrl:url',
-            [
-                'header' => 'Service',
-                'attribute' => 'serviceId',
-                'value' => 'serviceJudul'
-            ],
+//            'officeHourId',
+            'officeHourValue',
+            'officeHourTitle',
             [
                 'label'=>'Status',
-                'attribute'=>'serviceKategoriStatus',
+                'attribute'=>'officeHourStatus',
                 'format'=>'raw',
                 'value'=>function($model){
                         return Status($model);
@@ -50,6 +45,6 @@ function Status($model){
     ]); ?>
     
     <p>
-        <?= Html::a('Tambah Service Kategori', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Tambah Office Hour', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 </div>

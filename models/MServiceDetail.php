@@ -24,6 +24,8 @@ class MServiceDetail extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public $serviceJudul;
+    public $serviceKategoriJudul;
     public function rules()
     {
         return [

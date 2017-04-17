@@ -31,7 +31,11 @@ function Status($model){
 //            'kapasitasId',
             'kapasitasJudul',
             'kapasitasHarga',
-            'serviceDetailId',
+            [
+                'header' => 'Service Detail',
+                'attribute' => 'serviceDetailId',
+                'value' => 'serviceDetailJudul'
+            ],
             [
                 'label'=>'Status',
                 'attribute'=>'kapasitasStatus',
