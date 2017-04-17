@@ -71,7 +71,7 @@ class MEventsController extends Controller
             $img = Yii::$app->security->generateRandomString();
 
             $nama = $img . '.' . $model->eventGambarUrl->extension;
-            $model->eventGambarUrl->saveAs(Yii::$app->params['uploadGalery'] . $nama);
+            $model->eventGambarUrl->saveAs(Yii::$app->params['GambarEvent'] . $nama);
             $model->eventGambarUrl = $nama;
             $model->eventDibuatOleh = Yii::$app->user->identity->id;
             $model->eventDibuatTgl = date('Y-m-d');
