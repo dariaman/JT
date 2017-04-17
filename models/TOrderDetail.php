@@ -66,4 +66,13 @@ class TOrderDetail extends \yii\db\ActiveRecord
             'orderDetailProperti' => 'Order Detail Properti',
         ];
     }
+
+    /**
+     * @inheritdoc
+     * @return OrderQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new OrderQuery(get_called_class());
+    }
 }

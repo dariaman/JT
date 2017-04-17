@@ -173,6 +173,24 @@ class TOrderController extends Controller
             ]);
         }
     }
+    
+    public function actionInboundOrder()
+    {
+        $modelH = new TOrder();
+        $modelsD = [new TOrderDetail()];
+        $dropDownDataService = \yii\helpers\ArrayHelper::map(\app\models\MServiceDetail::find()->all(),'serviceDetailId','serviceDetailJudul');
+        $dataJam = \yii\helpers\ArrayHelper::map(\app\models\MOfficeHour::find()->all(),'officeHourId','officeHourTitle');
+
+        if (Yii::$app->request->isPost) {
+        } else {
+            return $this->render('Inbound-Order', [
+                'modelH' => $modelH,
+                'modelsD' => (empty($modelsD)) ? [new TOrderDetail()] : $modelsD,
+                'dropDownDataService' => $dropDownDataService,
+                'dataJam' => $dataJam,
+            ]);
+        }
+    }
 
     public function actionWo()
     {
@@ -200,10 +218,10 @@ class TOrderController extends Controller
         }
     }
     
-    public function actionPrintWo($id,$orderid) {
+    public function actionPrintWo($rekanid,$orderid) {
         // get your HTML raw content without any layouts or scripts
         
-        $content = $this->renderPartial('renderwo',['id'=>$id,'orderid' => $orderid]);
+        $content = $this->renderPartial('renderwo',['rekanid'=>$rekanid,'orderid' => $orderid]);
 
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
@@ -236,10 +254,10 @@ class TOrderController extends Controller
         return $pdf->render();
     }
     
-    public function actionPrintInv($id,$orderid) {
+    public function actionPrintInv($orderid) {
         // get your HTML raw content without any layouts or scripts
         
-        $content = $this->renderPartial('renderinv',['id'=>$id,'orderid' => $orderid]);
+        $content = $this->renderPartial('renderinv',['orderid' => $orderid]);
 
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([

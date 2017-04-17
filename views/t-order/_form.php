@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-use kartik\widgets\Datepicker;
+use kartik\widgets\DatePicker;
 use kartik\widgets\Select2;
 use kartik\checkbox\CheckboxX;
 use kartik\depdrop\DepDrop;

@@ -36,6 +36,11 @@ Modal::end();
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
+                'label'=>'orderId',
+                'contentOptions' => ['style' => 'width: 25px;'],
+                'value'=>'orderId'
+            ],
+            [
                 'label'=>'Customer',
                 'value'=>'userNamaDepan'
             ],
@@ -78,7 +83,7 @@ Modal::end();
                 'header' => 'Print WO',
                 'format' => 'raw',
                 'value' => function($data){
-                    return Html::a('Print WO',['print-wo','id' => $data['orderDetailId'],'orderid' => $data['orderId']]);
+                    return Html::a('Print WO',['print-wo','rekanid' => $data['rekanId'],'orderid' => $data['orderId']]);
                 }
             ]
         ],

@@ -20,30 +20,64 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'orderId',
-            'orderTgl',
-            'orderJenisBayar',
-            'orderAlamat',
-            'orderKota',
-            'orderKelurahan',
-            'orderKecamatan',
-            'orderDaerah',
-            'orderKodePos',
-            'orderAlamatNote',
-            'orderGpsKoordinat',
-            'orderBiayaTransport',
-            'orderStatus',
             [
-                'header' => 'Detail',
+                'header' => 'Order ID',
                 'format' => 'raw',
+                'value' => function($data){
+                    return Html::a($data['orderId'], ['detail', 'id' => $data['orderId']]);
+                }
+            ],
+            [
+                'attribute' => 'orderTgl',
+                'format' => ['date', 'php:d M Y']
+            ],
+            [
+                'header' => 'Jenis Bayar',
                 'value' => function($data)
                 {
-                    return Html::a('Detail', ['detail', 'id' => $data['orderId']]);
+                    if($data['orderStatus'] = "1"){
+                        return "Tunai";
+                    }
+                    else if($data['orderStatus'] = "2"){
+                        return "Transfer";
+                    }
+                    else if($data['orderStatus'] = "3"){
+                        return "Karu Kredit";
+                    }
                 }
-                
-            ]
-//            ['class' => 'yii\grid\ActionColumn'],
+            ],
+            'orderAlamat',
+//            'orderKota',
+//            'orderKelurahan',
+//            'orderKecamatan',
+//            'orderDaerah',
+//            'orderKodePos',
+            'orderAlamatNote',
+            [
+                'label' => 'Biaya Transport',
+                'value' => 'orderBiayaTransport',
+                'format' => ['decimal', 0],
+                'contentOptions' => ['Align' => 'right','style' => 'width: 130px;'],
+                'headerOptions' => ['style' => 'text-align:center']
+            ],
+            [
+                'header' => 'Download Invoice',
+                'format' => 'raw',
+                'value' => function($data){
+                    return Html::a('Print Invoice',['print-inv','orderid' => $data['orderId']]);
+                }
+            ],
+//            [
+//                'class' => '\kartik\grid\BooleanColumn',
+//                'header' => 'Order Status',
+//                'trueLabel' => 'Yes', 
+//                'falseLabel' => 'No',
+//                'value' => function($data)
+//                {
+//                    return $data['orderStatus'];
+//                }
+//            ],
+            ['class' => 'yii\grid\ActionColumn','template'=>'{update}'],
         ],
     ]); ?>
 

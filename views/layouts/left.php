@@ -64,7 +64,6 @@
                         "url" => "#",
                         "icon" => "table",
                         "items" => [
-                            ['label' => 'Promo', 'url' => ['/m-promo']],
                             ['label' => 'tips', 'url' => ['/m-tips']],
                             ['label' => 'testimoni', 'url' => ['/m-testimoni']],
                             ['label' => 'Faq', 'url' => ['/m-faq']]

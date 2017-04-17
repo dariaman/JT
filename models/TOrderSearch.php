@@ -50,6 +50,7 @@ class TOrderSearch extends TOrder
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=> ['defaultOrder' => ['orderId'=>SORT_DESC]]
         ]);
 
         $this->load($params);
@@ -84,7 +85,21 @@ class TOrderSearch extends TOrder
     
     public function searchDetail($id)
     {
-        $query = TOrderDetail::find()->where(['orderId' => $id]);
+//        $query = TOrderDetail::find()->where(['orderId' => $id]);
+        $query = (new \yii\db\Query)
+                ->select("tx.`orderDetailId` AS id,
+                    tx.`orderId`,
+                    md.`serviceDetailJudul`,
+                    kd.`kapasitasJudul`,
+                    tx.`orderDetailTglKerja`,
+                    tx.`orderDetailWaktuKerja`,
+                    tx.`orderDetailQTY`,
+                    tx.`orderDetailKeluhan`")
+                ->from('t_order_detail tx')
+                ->leftJoin("`m_service_detail` md","md.`serviceDetailId`=tx.`serviceDetailId`")
+                ->leftJoin("`m_kapasitas_detail` kd","kd.`kapasitasId`=tx.`kapasitasId`")
+                ->where("tx.`orderId`=".$id)
+                ;
 
         // add conditions that should always apply here
 
@@ -120,6 +135,7 @@ class TOrderSearch extends TOrder
             ->andFilterWhere(['like', 'orderStatus', $this->orderStatus]);
 
         return $dataProvider;
+
     }
     
     public function searchWo($params)
@@ -136,16 +152,15 @@ class TOrderSearch extends TOrder
                         md.`serviceDetailJudul`,
                         mr.`rekanNamaLengkap`")
                 ->from('t_order_detail tx')
-                ->innerJoin("`t_order` tt ","tt.`orderId`=tx.`orderId`")
-                ->innerJoin("`m_user` mu "," mu.`userId`=tt.`userId`")
-                ->innerJoin("`m_kota` mk "," mk.`kotaId`=tt.`orderKota`")
-                ->innerJoin("`m_service_detail` md "," md.`serviceDetailId`=tx.`serviceDetailId`")
-                ->innerJoin("`m_service_kategori` mg "," mg.`serviceKategoriId`=md.`serviceKategoriId`")
-                ->innerJoin("`m_service` ms "," ms.`serviceId`=md.`serviceId`")
-                ->leftJoin("`m_rekan_jt` mr "," tx.`rekanId`=mr.`rekanId`");
-//                ->where(['tx.orderId' => $id]);
-
-        // add conditions that should always apply here
+                ->leftJoin("`t_order` tt ","tt.`orderId`=tx.`orderId`")
+                ->leftJoin("`m_user` mu "," mu.`userId`=tt.`userId`")
+                ->leftJoin("`m_kota` mk "," mk.`kotaId`=tt.`orderKota`")
+                ->leftJoin("`m_service_detail` md "," md.`serviceDetailId`=tx.`serviceDetailId`")
+                ->leftJoin("`m_service_kategori` mg "," mg.`serviceKategoriId`=md.`serviceKategoriId`")
+                ->leftJoin("`m_service` ms "," ms.`serviceId`=md.`serviceId`")
+                ->leftJoin("`m_rekan_jt` mr "," tx.`rekanId`=mr.`rekanId`")
+                // ->groupBy(['tt.orderId','tx.rekanId'])
+                ->orderBy(['tt.orderId'=>SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -154,8 +169,6 @@ class TOrderSearch extends TOrder
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 

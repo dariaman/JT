@@ -1,33 +1,27 @@
 <?php
 
-$id = Yii::$app->request->get('id');
-$orderId = Yii::$app->request->get('orderid');
+$header = (new \yii\db\Query())
+        ->select('*')
+        ->from('t_order as o')
+        ->leftJoin('t_order_detail td','o.orderID = td.orderId')
+        ->innerJoin('m_rekan_jt rj','rj.rekanId = td.rekanId')
+        ->innerJoin('m_user mu','mu.userId=o.userId')
+        ->where(['o.orderId' => $orderid])
+        ->all();
 
-$db = (new \yii\db\Query())
+$detail = (new \yii\db\Query())
         ->select('*')
         ->from('t_order_detail as td')
-        ->innerJoin('t_order o','o.orderID = td.orderId')
+        ->leftJoin('t_order o','o.orderID = td.orderId')
         ->innerJoin('m_rekan_jt rj','rj.rekanId = td.rekanId')
-        ->innerJoin('m_service_detail msd','msd.serviceDetailId = td.serviceDetailId')
-        ->innerJoin('m_service ms','ms.serviceId = msd.serviceId')
-        ->innerJoin('m_service_kategori msk','msk.serviceKategoriId = msd.serviceKategoriId')
-        ->innerJoin('m_kapasitas_detail mkd','mkd.kapasitasId = td.kapasitasId')
-        ->where(['td.orderId' => $orderId])
-        ->andWhere(['td.orderDetailId' => $id])
-        ->one();
+        ->leftJoin('m_service_detail msd','msd.serviceDetailId = td.serviceDetailId')
+        ->leftJoin('m_service ms','ms.serviceId = msd.serviceId')
+        ->leftJoin('m_service_kategori msk','msk.serviceKategoriId = msd.serviceKategoriId')
+        ->leftJoin('m_kapasitas_detail mkd','mkd.kapasitasId = td.kapasitasId')
+        ->where(['td.orderId' => $orderid])
+        ->andWhere(['td.rekanId' => $rekanid])
+        ->all();
 
-$count = (new \yii\db\Query())
-        ->select('*')
-        ->from('t_order_detail as td')
-        ->innerJoin('t_order o','o.orderID = td.orderId')
-        ->innerJoin('m_rekan_jt rj','rj.rekanId = td.rekanId')
-        ->innerJoin('m_service_detail msd','msd.serviceDetailId = td.serviceDetailId')
-        ->innerJoin('m_service ms','ms.serviceId = msd.serviceId')
-        ->innerJoin('m_service_kategori msk','msk.serviceKategoriId = msd.serviceKategoriId')
-        ->innerJoin('m_kapasitas_detail mkd','mkd.kapasitasId = td.kapasitasId')
-        ->where(['td.orderId' => $orderId])
-        ->andWhere(['td.orderDetailId' => $id])
-        ->count();
 ?>
 <div class="content-wrapper">
     <section class="content-header">
@@ -37,11 +31,11 @@ $count = (new \yii\db\Query())
         <div style="margin-left:300px; margin-bottom: 30px;">
             <label>Jagonya Tukang</label>
         </div>
-        <div style="margin-left:500px;">
-            <label>Tanggal Order : <?= date('j F Y',strtotime($db['orderDetailTglKerja'])) ?></label>
+        <div style="margin-left:500px;"><br>
+            <label>Tanggal Order : <?= date('j F Y',strtotime($header[0]['orderTgl'])) ?></label>
         </div>
         <h3 style="margin-left:40%; margin-top: -20px;"><strong><?= strtoupper('work order');?></strong></h3>
-        <div style="margin-left:44%;">No. Order OD#<?= $db['orderId'];?></div>
+        <div style="margin-left:44%;">No. Order OD#<?= $header[0]['orderId'];?></div>
     </section>
     
     <!-- Main content -->
@@ -50,9 +44,9 @@ $count = (new \yii\db\Query())
         <div class="row invoice-info" style="margin-top:50px;">
             <div class="col-sm-4 invoice-col">
               <address>
-                <strong>Nama : </strong><?= $db['rekanNamaLengkap'];?><br>
-                <strong>Alamat : </strong><?= $db['rekanAlamat'];?><br>
-                <strong>Telepon : </strong><?= $db['rekanNoHp'];?><br>
+                <strong>Nama : </strong><?= $header[0]['rekanNamaLengkap'];?><br>
+                <strong>Alamat : </strong><?= $header[0]['rekanAlamat'];?><br>
+                <strong>Telepon : </strong><?= $header[0]['rekanNoHp'];?><br>
               </address>
             </div>
             <!-- /.col -->
@@ -75,17 +69,19 @@ $count = (new \yii\db\Query())
                     <th>Total</th>
                 </tr>
             </thead>
-            <tbody>
-                @for($i=0;$i<$count;$i++)
+            <?php $i=1; 
+                $sub=0;
+                foreach ($detail as &$val) { ?>
                 <tr>
-                    <td><?= $count ?></td>
-                    <td><?= $db['serviceKategoriJudul'].' Jasa '.$db['serviceDetailJudul'].' '.$db['kapasitasJudul'] ?></td>
-                    <td><?= $db['orderDetailQTY'] ?></td>
-                    <td><?= number_format($db['kapasitasHarga']) ?></td>
-                    <td><?= number_format($db['orderDetailQTY'] * $db['kapasitasHarga']); ?></td>
+                    <td><?= $i ?></td>
+                    <td><?= $val['serviceKategoriJudul'].' Jasa '.$val['serviceDetailJudul'].' '.$val['kapasitasJudul'] ?></td>
+                    <td><?= $val['orderDetailQTY'] ?></td>
+                    <td><?= number_format($val['kapasitasHarga']) ?></td>
+                    <td><?= number_format($val['orderDetailQTY'] * $val['kapasitasHarga']); ?></td>
                 </tr>
-                @endfor
-            </tbody>
+            <?php $i++; 
+                $sub += $val['orderDetailQTY'] * $val['kapasitasHarga'];
+                }?>
           </table>
         </div>
         <!-- /.col -->
@@ -99,15 +95,15 @@ $count = (new \yii\db\Query())
             <table class="table">
               <tr>
                 <th style="width:150px">Subtotal</th>
-                <td> : <?= number_format($db['orderDetailQTY'] * $db['kapasitasHarga']); ?></td>
+                <td> : <?= number_format($sub); ?></td>
               </tr>
               <tr>
                 <th>Transportasi</th>
-                <td> : 0</td>
+                <td> : <?= number_format($header[0]['orderBiayaTransport']) ?></td>
               </tr>              
               <tr>
                 <th>Total</th>
-                <td> : <?= number_format($db['orderDetailQTY'] * $db['kapasitasHarga']); ?></td>
+                <td> : <?= number_format($sub + $header[0]['orderBiayaTransport'] ); ?></td>
               </tr>
             </table>
           </div>
@@ -119,10 +115,10 @@ $count = (new \yii\db\Query())
         <div>
             <h3>Catatan Order</h3>
         </div>
-          <table border="1">            
+          <table class="table table-bordered">            
             <tbody>
                 <tr>
-                    <td style="width:680px;"><?= 'Tgl Kunj : '.date('dMy').', Teknisi : '.$db['rekanNamaLengkap'].', Note Tech : Pekerjaan '.$db['serviceKategoriJudul'].' selesai'  ?></td>
+                    <td style="width:680px;"> Kolom komentar</td>
                 </tr>
             </tbody>
           </table>
@@ -134,7 +130,7 @@ $count = (new \yii\db\Query())
         <div>
             <h3>Catatan Teknisi</h3>
         </div>
-          <table border="1">            
+            <table class="table table-bordered">            
             <tbody>
                 <tr>
                     <td style="width:680px; height:100px;"></td>
