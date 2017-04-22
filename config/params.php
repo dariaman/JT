@@ -7,5 +7,7 @@ return [
         'defaultUserStatus' => 10, // 0 = inactive, 10 = active
     ],
     'uploadGalery'=>'../gbr/',
-    'GambarEvent'=>'../gbr/'
+    'GambarEvent'=>'../gbr/event/',
+    'GambarPromo' => '../gbr/promo/',
+    'GambarServiceDetail' => '../gbr/service/'
 ];

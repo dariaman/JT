@@ -32,7 +32,15 @@ function Status($model){
 //            'serviceDetailId',
             'serviceDetailJudul',
             'serviceDetailDeskripsi:ntext',
-            'serviceDetailGambar',
+            [
+                'attribute' => 'serviceDetailGambar',
+                'format' => 'html',
+                'label' => 'serviceDetailGambar',
+                'value' => function ($data) {
+                    return Html::img('../'.Yii::$app->params['GambarServiceDetail'].$data['serviceDetailGambar'],
+                        ['width' => '200px']);
+                },
+            ],
             [
                 'header' => 'Service Kategori',
                 'attribute' => 'serviceKategoriId',

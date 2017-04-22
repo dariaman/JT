@@ -26,6 +26,7 @@ class MServiceDetail extends \yii\db\ActiveRecord
      */
     public $serviceJudul;
     public $serviceKategoriJudul;
+    public $pic;
     public function rules()
     {
         return [
@@ -35,6 +36,7 @@ class MServiceDetail extends \yii\db\ActiveRecord
             [['serviceDetailJudul'], 'string', 'max' => 100],
             [['serviceDetailGambar'], 'string', 'max' => 200],
             [['serviceDetailStatus'], 'string', 'max' => 1],
+            [['pic'], 'file'],
         ];
     }
     

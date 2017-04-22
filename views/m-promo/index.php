@@ -25,7 +25,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'promoJudul',
             'promoDeskripsi:ntext',
             'promoTgl',
-            'promoGambarUrl:url',
+//            'promoGambarUrl:url',
+            [
+                'attribute' => 'promoGambarUrl',
+                'format' => 'html',
+                'label' => 'promoGambarUrl',
+                'value' => function ($data) {
+                    return Html::img('../'.Yii::$app->params['GambarPromo'].$data['promoGambarUrl'],
+                        ['width' => '200px']);
+                },
+            ],
             // 'promoDibuatTgl',
             // 'promoDibuatOleh',
             // 'promoStatus',

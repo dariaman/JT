@@ -7,6 +7,7 @@ use app\models\MServiceDetail;
 use app\models\MServiceDetailSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\UploadedFile;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use app\models\MService;
@@ -108,7 +109,13 @@ class MServiceDetailController extends Controller
     public function actionCreate()
     {
         $model = new MServiceDetail();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->serviceDetailGambar = UploadedFile::getInstance($model, 'pic');
+            $img = Yii::$app->security->generateRandomString();
+            $nama = $img . '.' . $model->serviceDetailGambar->extension;
+            $model->serviceDetailGambar->saveAs(Yii::$app->params['GambarServiceDetail'].'images/Product/AC/'. $nama);
+            $model->serviceDetailGambar = 'images/Product/AC/'.$nama;
+            $model->save(false);
             return $this->redirect(['index']);
         } else {
             return $this->render('create', [
@@ -126,13 +133,22 @@ class MServiceDetailController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['update', 'id' => $model->serviceDetailId]);
+        
+        if (Yii::$app->request->isPost) {
+            if (file_exists(Yii::$app->params['GambarServiceDetail'] . $model->serviceDetailGambar)){
+                unlink(Yii::$app->params['GambarServiceDetail'] . $model->serviceDetailGambar);    
+            }
+            $model->load(Yii::$app->request->post());
+            $model->serviceDetailGambar = UploadedFile::getInstance($model, 'pic');
+            $img = Yii::$app->security->generateRandomString();
+            $nama = $img . '.' . $model->serviceDetailGambar->extension;
+            $model->serviceDetailGambar->saveAs(Yii::$app->params['GambarServiceDetail'].'images/Product/AC/'. $nama);
+            $model->serviceDetailGambar = 'images/Product/AC/'.$nama;
+            $model->save(false);
+            return $this->redirect(['index']);
         } else {
             return $this->render('update', [
                 'model' => $model,
-//                'data_service'=>self::ary_service(),
-//                'data_status'=>self::ary_status()
             ]);
         }
     }

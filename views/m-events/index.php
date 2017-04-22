@@ -34,7 +34,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'eventJudul',
             'eventDeskripsi:ntext',
             'eventTgl',
-            'eventGambarUrl:url',
+//            'eventGambarUrl:url',
+            [
+                'attribute' => 'eventGambarUrl',
+                'format' => 'html',
+                'label' => 'eventGambarUrl',
+                'value' => function ($data) {
+                    return Html::img('../'.Yii::$app->params['GambarEvent'].$data['eventGambarUrl'],
+                        ['width' => '200px']);
+                },
+            ],
              [
                 'label'=>'Status',
                 'attribute'=>'eventStatus',
@@ -47,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'eventDibuatOleh',
             // 'eventStatus',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}'],
         ],
     ]); ?>
     

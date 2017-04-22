@@ -28,7 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'galleriJudul',
             'galleriDeskripsi:ntext',
             'galleriTgl',
-            'galleriGambarUrl:url',
+//            'galleriGambarUrl:url',
+            [
+                'attribute' => 'galleriGambarUrl',
+                'format' => 'html',
+                'label' => 'galleriGambarUrl',
+                'value' => function ($data) {
+                    return Html::img('../'.Yii::$app->params['uploadGalery'].$data['galleriGambarUrl'],
+                        ['width' => '200px']);
+                },
+            ],
             'galleriStatus',
 
             ['class' => 'yii\grid\ActionColumn','template'=>'{update}{delete}'],
